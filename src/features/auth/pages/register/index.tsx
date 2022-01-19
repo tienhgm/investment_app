@@ -1,5 +1,5 @@
 import { Form, Input, Button } from 'antd';
-import { REGEX_CHECK_EMAIL } from 'constants/regex';
+import { REGEX_CHECK_EMAIL } from 'helper/regex';
 import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 export default function RegisterPage() {

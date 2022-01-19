@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import GuardRoute from 'components/GuardRoute';
 import './App.less';
-import MainLayout from 'components/Layout/MainLayout';
+
 import NotFound from 'components/NotFound';
-import LoginPage from 'features/auth/pages/login';
-import RegisterPage from 'features/auth/pages/register';
-import AddInfo from 'features/auth/pages/AddInfo';
+// import MainLayout from 'components/Layout/MainLayout';
+// import LoginPage from 'features/auth/pages/login';
+// import RegisterPage from 'features/auth/pages/register';
+// import AddInfo from 'features/auth/pages/AddInfo';
 import AuthRoute from 'components/AuthRoute';
+
+const LoginPage = lazy(() => import('features/auth/pages/login'));
+const RegisterPage = lazy(() => import('features/auth/pages/register'));
+const AddInfo = lazy(() => import('features/auth/pages/AddInfo'));
+const MainLayout = lazy(() => import('components/Layout/MainLayout'));
 
 function App() {
   return (

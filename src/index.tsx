@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.less';
 import App from './App';
@@ -9,9 +9,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Suspense fallback={<div>Loading...</div>}>
         <App />
-      </BrowserRouter>
+      </Suspense>
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );
