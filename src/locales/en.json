@@ -1,0 +1,15 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "username": "User name",
+    "password": "Password",
+    "haventAccount": "Don't have an account ?",
+    "rememberMe": "Remember me",
+    "changelanguage": "English"
+  },
+  "validate": {
+    "usernameRequired": "Please input Email",
+    "passwordRequired": "Please input Password"
+  }
+}

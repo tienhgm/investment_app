@@ -1,5 +1,7 @@
 import { Form, Input, Button } from 'antd';
+import SelectLanguage from 'features/auth/components/SelectLanguage';
 import { REGEX_CHECK_EMAIL } from 'helper/regex';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 export default function LoginPage() {
@@ -12,12 +14,16 @@ export default function LoginPage() {
   };
   const history = useHistory();
   const handleGoToSignUp = () => {
-    history.push('/register')
-  }
+    history.push('/register');
+  };
+  const { t, i18n } = useTranslation();
+  const handleChangeLang = () => {
+    i18n.changeLanguage('en');
+  };
   return (
     <div className={styles.layout}>
       <div className={styles.loginBox}>
-        <h4>Sign in</h4>
+        <h4>{t('common.signIn')}</h4>
         <Form
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
@@ -27,10 +33,10 @@ export default function LoginPage() {
           autoComplete="off"
         >
           <Form.Item
-            label="Email"
+            label={t('common.username')}
             name="email"
             rules={[
-              { required: true, message: 'Please input your email!' },
+              { required: true, message: t('validate.usernameRequired') },
               { pattern: REGEX_CHECK_EMAIL, message: 'Email is invalid' },
             ]}
           >
@@ -38,7 +44,7 @@ export default function LoginPage() {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label={t('common.password')}
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
@@ -49,15 +55,19 @@ export default function LoginPage() {
           </Form.Item> */}
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Sign in
+              {t('common.signIn')}
             </Button>
           </Form.Item>
         </Form>
         <div className={styles.toSignUp}>
-          Don't have an account ?
+          {t('common.haventAccount')}
           <Button type="link" style={{ fontWeight: 'bold' }} onClick={handleGoToSignUp}>
-            Sign Up
+            {t('common.signUp')}
           </Button>
+          <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+            
+            <SelectLanguage />
+          </div>
         </div>
       </div>
     </div>
