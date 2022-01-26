@@ -13,7 +13,6 @@ export default function SelectLanguage() {
   return (
     <Select
       placeholder="Language"
-      allowClear
       style={{ width: 120 }}
       onChange={handleChange}
       suffixIcon={<GlobalOutlined />}

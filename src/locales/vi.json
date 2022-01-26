@@ -1,15 +1,17 @@
 {
-    "common": {
-      "signIn": "Đăng nhập",
-      "signUp": "Đăng ký",
-      "username": "Tài khoản",
-      "password": "Mật khẩu",
-      "haventAccount":"Bạn chưa có tài khoản ?",
-      "rememberMe": "Nhớ tài khoản",
-      "changelanguage": "Tiếng Việt"
-    },
-    "validate": {
-      "usernameRequired": "Vui lòng nhập Email",
-      "passwordRequired": "Vui lòng nhập mật khẩu"
-    }
+  "common": {
+    "signIn": "Đăng nhập",
+    "signUp": "Đăng ký",
+    "username": "Tài khoản",
+    "password": "Mật khẩu",
+    "rePassword": "Nhập lại",
+    "haventAccount": "Bạn chưa có tài khoản ?",
+    "haveAccount": "Bạn đã có tài khoản ?",
+    "rememberMe": "Nhớ tài khoản",
+    "changelanguage": "Tiếng Việt"
+  },
+  "validate": {
+    "usernameRequired": "Vui lòng nhập Email",
+    "passwordRequired": "Vui lòng nhập mật khẩu"
   }
+}

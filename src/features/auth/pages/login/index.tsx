@@ -16,10 +16,7 @@ export default function LoginPage() {
   const handleGoToSignUp = () => {
     history.push('/register');
   };
-  const { t, i18n } = useTranslation();
-  const handleChangeLang = () => {
-    i18n.changeLanguage('en');
-  };
+  const { t } = useTranslation();
   return (
     <div className={styles.layout}>
       <div className={styles.loginBox}>
@@ -65,7 +62,6 @@ export default function LoginPage() {
             {t('common.signUp')}
           </Button>
           <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
-            
             <SelectLanguage />
           </div>
         </div>

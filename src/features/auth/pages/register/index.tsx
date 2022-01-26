@@ -1,5 +1,7 @@
 import { Form, Input, Button } from 'antd';
+import SelectLanguage from 'features/auth/components/SelectLanguage';
 import { REGEX_CHECK_EMAIL } from 'helper/regex';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 export default function RegisterPage() {
@@ -17,10 +19,11 @@ export default function RegisterPage() {
   const handleGoToSignIn = () => {
     history.push('/login');
   };
+  const { t } = useTranslation();
   return (
     <div className={styles.layout}>
       <div className={styles.loginBox}>
-        <h4>Sign Up</h4>
+        <h4>{t('common.signUp')}</h4>
         <Form
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
@@ -30,7 +33,7 @@ export default function RegisterPage() {
           autoComplete="off"
         >
           <Form.Item
-            label="Email"
+            label={t('common.username')}
             name="email"
             rules={[
               { required: true, message: 'Please input your email!' },
@@ -41,14 +44,14 @@ export default function RegisterPage() {
           </Form.Item>
 
           <Form.Item
-            label="Password"
+            label={t('common.password')}
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input.Password />
           </Form.Item>
           <Form.Item
-            label="Re password"
+            label={t('common.rePassword')}
             name="re_password"
             rules={[
               { required: true, message: 'Please input your password!' },
@@ -62,22 +65,25 @@ export default function RegisterPage() {
               }),
             ]}
           >
-            <Input.Password placeholder="Repeat Password" autoComplete="false" />
+            <Input.Password autoComplete="false" />
           </Form.Item>
           {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
             <Checkbox>Remember me</Checkbox>
           </Form.Item> */}
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Sign up
+              {t('common.signUp')}
             </Button>
           </Form.Item>
         </Form>
         <div className={styles.toSignUp}>
-          Have already an account ?
+          {t('common.haveAccount')}
           <Button type="link" style={{ fontWeight: 'bold' }} onClick={handleGoToSignIn}>
-            Sign In
+            {t('common.signIn')}
           </Button>
+          <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+            <SelectLanguage />
+          </div>
         </div>
       </div>
     </div>

@@ -4,7 +4,9 @@
     "signUp": "Sign up",
     "username": "User name",
     "password": "Password",
+    "rePassword": "Re password",
     "haventAccount": "Don't have an account ?",
+    "haveAccount": "Have already an account ?",
     "rememberMe": "Remember me",
     "changelanguage": "English"
   },
