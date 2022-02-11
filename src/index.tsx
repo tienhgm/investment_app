@@ -11,7 +11,8 @@ import 'helper/i18n';
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={null}>
+      {/* <Suspense fallback={<div>Loading...</div>}> */}
         <App />
       </Suspense>
     </BrowserRouter>

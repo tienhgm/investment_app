@@ -12,7 +12,6 @@ export default function RegisterPage() {
     localStorage.setItem('access_token_invest', '1234');
     history.push('/confirm-info');
   };
-
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
@@ -42,7 +41,6 @@ export default function RegisterPage() {
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label={t('common.password')}
             name="password"
@@ -66,7 +64,7 @@ export default function RegisterPage() {
             ]}
           >
             <Input.Password autoComplete="false" />
-          </Form.Item>
+          </Form.Item> 
           {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
             <Checkbox>Remember me</Checkbox>
           </Form.Item> */}
