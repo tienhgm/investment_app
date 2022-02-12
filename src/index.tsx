@@ -7,12 +7,13 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import 'helper/i18n';
+import { Loading } from 'components/Common';
 
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <Suspense fallback={null}>
-      {/* <Suspense fallback={<div>Loading...</div>}> */}
+      <Suspense fallback={<Loading />}>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
         <App />
       </Suspense>
     </BrowserRouter>

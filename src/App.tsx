@@ -1,15 +1,8 @@
 import React, { lazy, useEffect } from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
-import GuardRoute from 'components/GuardRoute';
 import './App.less';
 
-import NotFound from 'components/NotFound';
-// import MainLayout from 'components/Layout/MainLayout';
-// import LoginPage from 'features/auth/pages/login';
-// import RegisterPage from 'features/auth/pages/register';
-// import AddInfo from 'features/auth/pages/AddInfo';
-import AuthRoute from 'components/AuthRoute';
-
+import { GuardRoute, NotFound, AuthRoute } from 'components/Common';
 const LoginPage = lazy(() => import('features/auth/pages/login'));
 const RegisterPage = lazy(() => import('features/auth/pages/register'));
 const AddInfo = lazy(() => import('features/auth/pages/AddInfo'));

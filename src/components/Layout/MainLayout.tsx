@@ -10,7 +10,7 @@ import styles from './style.module.scss';
 import { getPathKey } from 'helper/enum';
 import { lazy, useEffect, useState } from 'react';
 import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-dom';
-import NotFound from 'components/NotFound';
+import { Loading, NotFound } from 'components/Common';
 const { Content, Sider } = Layout;
 // const { SubMenu } = Menu;
 const Dashboard = lazy(() => import('features/dashboard/pages'));
