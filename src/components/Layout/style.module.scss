@@ -3,6 +3,8 @@
   text-align: center;
   font-weight: 600;
   font-size: 1.4rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 3px dotted #058f48d5;
 }
 .headerPage {
   padding: 1.05rem 2.5rem;
@@ -11,7 +13,7 @@
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
   display: flex;
   justify-content: end;
-  gap: 1.5rem;
+  gap: 2.5rem;
   align-items: center;
   .dropAvt {
     cursor: pointer;
