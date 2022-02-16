@@ -1,14 +1,26 @@
 {
   "common": {
+    "home": "Home",
     "signIn": "Sign in",
     "signUp": "Sign up",
     "username": "User name",
     "password": "Password",
+    "changePass": "Change password",
     "rePassword": "Re password",
+    "logout": "Logout",
     "haventAccount": "Don't have an account ?",
     "haveAccount": "Have already an account ?",
     "rememberMe": "Remember me",
-    "changelanguage": "English"
+    "changelanguage": "English",
+    "dashboard":"Dashboard",
+    "packages":"Investment packages",
+    "interest_tool": "Interest tool",
+    "history_transaction": "Transaction history",
+    "notify": "Notification",
+    "user": "User",
+    "profile": "Profile",
+    "setting": "Settings",
+    "otp": "Smart OTP"
   },
   "validate": {
     "usernameRequired": "Please input Email",
