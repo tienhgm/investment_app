@@ -1,4 +1,7 @@
 import { Form, Input, Button } from 'antd';
+import { useAppDispatch } from 'app/hooks';
+import { register } from 'app/slices/authSlice';
+import { LoginPayload } from 'common';
 import SelectLanguage from 'features/auth/components/SelectLanguage';
 import { REGEX_CHECK_EMAIL } from 'helper/regex';
 import { useTranslation } from 'react-i18next';
@@ -6,11 +9,10 @@ import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 export default function RegisterPage() {
   const history = useHistory();
-
-  const onFinish = (values: any) => {
-    console.log('Success:', values);
-    localStorage.setItem('access_token_invest', '1234');
-    history.push('/confirm-info');
+  const dispatch = useAppDispatch();
+  const onFinish = async (values: LoginPayload) => {
+    delete values.re_password;
+    await dispatch(register(values));
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -64,7 +66,7 @@ export default function RegisterPage() {
             ]}
           >
             <Input.Password autoComplete="false" />
-          </Form.Item> 
+          </Form.Item>
           {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
             <Checkbox>Remember me</Checkbox>
           </Form.Item> */}

@@ -1,11 +1,22 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
+import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './rootSaga';
+import authReducer from './slices/authSlice';
+import { persistReducer } from "redux-persist";
+import storage from 'redux-persist/lib/storage';
+const rootReducer = combineReducers({
+  auth: authReducer
+})
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["auth"],
+};
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
-  reducer: {
-  },
+  reducer: { persistedReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),
 });

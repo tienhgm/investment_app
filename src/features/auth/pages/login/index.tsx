@@ -6,7 +6,17 @@ import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 export default function LoginPage() {
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    const data: any = {
+      otp: '606782'
+    };
+    // const a = fetch('/api/accounts/active', {
+    //   method: 'PATCH',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(data),
+    // });
+    
   };
 
   const onFinishFailed = (errorInfo: any) => {

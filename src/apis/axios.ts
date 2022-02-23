@@ -2,12 +2,13 @@ import Axios from 'axios';
 import configs from '../config';
 const axiosInstance = Axios.create({
     timeout: 3 * 60 * 1000,
-    baseURL: configs.BASE_URL
+    // baseURL: configs.BASE_URL
 });
 axiosInstance.interceptors.request.use(
     (config) => {
         // @ts-ignore
-        config.headers.Authorization = getAuthHeader();
+        // config.headers.Authorization = `Bearer 123`;
+        config.headers['Access-Control-Allow-Origin'] = `*`;
         return config;
     },
     (error) => Promise.reject(error)

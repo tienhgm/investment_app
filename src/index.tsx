@@ -6,17 +6,20 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import persistStore from 'redux-persist/es/persistStore';
 import 'helper/i18n';
 import { Loading } from 'components/Common';
-
+const persistor = persistStore(store);
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Suspense fallback={<Loading />}>
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
-        <App />
-      </Suspense>
-    </BrowserRouter>
+    <PersistGate loading={null} persistor={persistor}>
+      <BrowserRouter>
+        <Suspense fallback={<Loading />}>
+          <App />
+        </Suspense>
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );
