@@ -16,9 +16,9 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const sagaMiddleware = createSagaMiddleware()
 export const store = configureStore({
-  reducer: { persistedReducer },
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+    getDefaultMiddleware({serializableCheck: false}).concat(sagaMiddleware),
 });
 sagaMiddleware.run(rootSaga)
 export type AppDispatch = typeof store.dispatch;

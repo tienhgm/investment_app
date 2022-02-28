@@ -1,8 +1,9 @@
+import { useAppSelector } from 'app/hooks';
 import React, { ReactElement } from 'react';
 import { Redirect, Route, RouteProps } from 'react-router-dom';
 
 export function GuardRoute(props: RouteProps): ReactElement {
-  const isLoggedIn = Boolean(localStorage.getItem('access_token_invest'));
+  let isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   if (!isLoggedIn) {
     return <Redirect to={'/login'} />;
   }

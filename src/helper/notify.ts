@@ -4,7 +4,7 @@ export const notify = (type: any, message: string, description: any) => {
     notification[type]({
         message: message,
         description: description,
-        placement: 'bottomLeft'
+        placement: 'topLeft'
     });
 };
 export const successMes = (content: any) => {

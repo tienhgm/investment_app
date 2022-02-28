@@ -1,22 +1,34 @@
 import { Form, Input, Button } from 'antd';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { loginThunk, selectAuthLoading } from 'app/slices/authSlice';
+import { LoginPayload } from 'common';
 import SelectLanguage from 'features/auth/components/SelectLanguage';
+import getIsLoggedIn from 'helper/common';
 import { REGEX_CHECK_EMAIL } from 'helper/regex';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 export default function LoginPage() {
-  const onFinish = (values: any) => {
-    const data: any = {
-      otp: '606782'
-    };
-    // const a = fetch('/api/accounts/active', {
-    //   method: 'PATCH',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(data),
-    // });
-    
+  const [form] = Form.useForm();
+  const isLoading = useAppSelector(selectAuthLoading);
+  // const onFinish = (values: any) => {
+  //   const data: any = {
+  //     otp: '606782',
+  //   };
+  //   // const a = fetch('/api/accounts/active', {
+  //   //   method: 'PATCH',
+  //   //   headers: {
+  //   //     'Content-Type': 'application/json',
+  //   //   },
+  //   //   body: JSON.stringify(data),
+  //   // });
+  // };
+  const dispatch = useAppDispatch();
+  const onFinish = async (values: LoginPayload) => {
+    const result = await dispatch(loginThunk(values));
+    // if (result.meta.requestStatus === 'fulfilled') {
+    //   form.resetFields();
+    // }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -32,6 +44,7 @@ export default function LoginPage() {
       <div className={styles.loginBox}>
         <h4>{t('common.signIn')}</h4>
         <Form
+          form={form}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
@@ -61,7 +74,7 @@ export default function LoginPage() {
             <Checkbox>Remember me</Checkbox>
           </Form.Item> */}
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
               {t('common.signIn')}
             </Button>
           </Form.Item>

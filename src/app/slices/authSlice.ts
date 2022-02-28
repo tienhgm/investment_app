@@ -1,67 +1,94 @@
-import { PayloadAction } from '@reduxjs/toolkit/src/createAction';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoginPayload } from 'common';
-import { notify } from 'helper/notify';
-import { handleRegister } from 'apis/auth';
+import { errorMes, successMes } from 'helper/notify';
+import { handleLogin, handleLogout, handleRegister } from 'apis/auth';
+import { RootState } from 'app/store';
 export interface AuthState {
-    isLoggedIn: boolean;
-    logging?: boolean;
     curUser: any;
     loading: boolean;
+    isLoggedIn: boolean;
+    isRegisterSuccess?: boolean
 }
 
 const initialState: AuthState = {
-    isLoggedIn: false,
-    logging: false,
     curUser: undefined,
-    loading: false
+    isLoggedIn: false,
+    loading: false,
+    isRegisterSuccess: false
 }
-export const register = createAsyncThunk("auth/register", async (payload: LoginPayload) => {
+export const registerThunk = createAsyncThunk("auth/registerThunk", async (payload: LoginPayload, { dispatch }) => {
     try {
-        console.log('payload', payload)
         const res = await handleRegister(payload);
-        console.log(res)
-        // if (res.statusCode === 200) {
-        //     notify("success", "", "");
-        //     // dispatch(handleGetCurUser(res.data.accessToken))
-        //     return res.data;
-        // }
+        if (res) {
+            successMes("Register success!")
+            return res;
+        }
     } catch (error: any) {
-        notify("error", error.data.message, "");
-    } finally {
+        errorMes(error.data.email);
+    }
+});
+export const loginThunk = createAsyncThunk("auth/loginThunk", async (payload: LoginPayload, { dispatch }) => {
+    try {
+        const res = await handleLogin(payload);
+        if (res) {
+            successMes("Login success!")
+            return res;
+        }
+    } catch (error: any) {
+        errorMes(error.data.email);
+    }
+});
+export const logoutThunk = createAsyncThunk("auth/logoutThunk", async () => {
+    try {
+        const res = await handleLogout();
+        if (res) {
+            successMes("Logout")
+            return res;
+        }
+    } catch (error: any) {
+        errorMes(error.data.email);
     }
 });
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        login(state, action: PayloadAction<LoginPayload>) {
-            state.logging = true
+    },
+    extraReducers: {
+        // @ts-ignore
+        [registerThunk.pending]: (state: any) => {
+            state.loading = true;
         },
-        // register(state, action: PayloadAction<LoginPayload>) {
-        //     state.loading = true
-        // },
-        loginSuccess(state, action: PayloadAction<any>) {
-            state.isLoggedIn = true;
-            state.logging = false;
+        // @ts-ignore
+        [registerThunk.fulfilled]: (state: any, action: PayloadAction<any>) => {
+            state.loading = false;
+            state.isRegisterSuccess = true;
             state.curUser = action.payload
         },
-        loginFailed(state) {
-            state.logging = false
+        // @ts-ignore
+        [loginThunk.pending]: (state: any, action: PayloadAction<any>) => {
+            state.loading = true;
         },
-        logout(state) {
-            state.isLoggedIn = false
-            state.curUser = undefined;
-        }
+        // @ts-ignore
+        [loginThunk.fulfilled]: (state: any, action: PayloadAction<any>) => {
+            state.loading = false;
+            state.isLoggedIn = true;
+            state.curUser = action.payload
+        },
+        // @ts-ignore
+        [logoutThunk.fulfilled]: (state: any, action: PayloadAction<any>) => {
+            return initialState;
+        },
     }
 })
 // Actions
 export const authActions = authSlice.actions;
 
 // Selectors
-export const selectIsLoggedIn = (state: any) => state.auth.isLoggedIn
-export const selectIsLogging = (state: any) => state.auth.logging
-
+export const selectCurrentUser = (state: RootState) => state.auth?.curUser
+export const selectIsRegisterSuccess = (state: RootState) => state.auth?.isRegisterSuccess
+export const selectAuthLoading = (state: RootState) => state.auth?.loading
+export const selectIsLoggedIn = (state: RootState) => state.auth?.isLoggedIn
 // Reducer
 const authReducer = authSlice.reducer;
 export default authReducer; 

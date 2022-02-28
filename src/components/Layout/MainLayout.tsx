@@ -14,6 +14,8 @@ import { Link, Route, Switch, useLocation, useRouteMatch } from 'react-router-do
 import { NotFound } from 'components/Common';
 import { useTranslation } from 'react-i18next';
 import SelectLanguage from 'features/auth/components/SelectLanguage';
+import { useAppDispatch } from 'app/hooks';
+import { logoutThunk } from 'app/slices/authSlice';
 const { Content, Sider } = Layout;
 const { SubMenu } = Menu;
 const Dashboard = lazy(() => import('features/dashboard/pages'));
@@ -21,11 +23,14 @@ const Packages = lazy(() => import('features/packages/pages'));
 const InterestTool = lazy(() => import('features/tool-interest/pages'));
 export default function MainLayout() {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch()
   const location = useLocation();
   const match = useRouteMatch();
   const [collapsed, setcollapsed] = useState(false);
   const [key, setKey] = useState<any>(null);
-
+  const handleLogout = () => {
+    dispatch(logoutThunk());
+  }
   const onCollapse = () => {
     setcollapsed(!collapsed);
   };
@@ -43,7 +48,7 @@ export default function MainLayout() {
         <a href="">{t('common.setting')}</a>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="2">{t('common.logout')}</Menu.Item>
+      <Menu.Item key="2" onClick={handleLogout}>{t('common.logout')}</Menu.Item>
     </Menu>
   );
   const notifyNavbar = (

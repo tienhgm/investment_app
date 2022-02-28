@@ -1,6 +1,6 @@
 import { Form, Input, Button } from 'antd';
-import { useAppDispatch } from 'app/hooks';
-import { register } from 'app/slices/authSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { registerThunk, selectAuthLoading } from 'app/slices/authSlice';
 import { LoginPayload } from 'common';
 import SelectLanguage from 'features/auth/components/SelectLanguage';
 import { REGEX_CHECK_EMAIL } from 'helper/regex';
@@ -8,11 +8,18 @@ import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import styles from './style.module.scss';
 export default function RegisterPage() {
+  const [form] = Form.useForm();
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(selectAuthLoading);
   const onFinish = async (values: LoginPayload) => {
     delete values.re_password;
-    await dispatch(register(values));
+    const result = await dispatch(registerThunk(values));
+    console.log(result)
+    if (result.meta.requestStatus === 'fulfilled') {
+      form.resetFields();
+      history.push('/login');
+    }
   };
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -26,6 +33,7 @@ export default function RegisterPage() {
       <div className={styles.loginBox}>
         <h4>{t('common.signUp')}</h4>
         <Form
+          form={form}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
@@ -71,7 +79,7 @@ export default function RegisterPage() {
             <Checkbox>Remember me</Checkbox>
           </Form.Item> */}
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={isLoading} disabled={isLoading}>
               {t('common.signUp')}
             </Button>
           </Form.Item>
