@@ -7,16 +7,16 @@ export interface AuthState {
     curUser: any;
     loading: boolean;
     isLoggedIn: boolean;
-    isRegisterSuccess?: boolean
+    isRegisterSuccess?: boolean;
 }
 
 const initialState: AuthState = {
     curUser: undefined,
     isLoggedIn: false,
     loading: false,
-    isRegisterSuccess: false
+    isRegisterSuccess: false,
 }
-export const registerThunk = createAsyncThunk("auth/registerThunk", async (payload: LoginPayload, { dispatch }) => {
+export const registerThunk = createAsyncThunk("auth/registerThunk", async (payload: LoginPayload) => {
     try {
         const res = await handleRegister(payload);
         if (res) {
@@ -27,7 +27,7 @@ export const registerThunk = createAsyncThunk("auth/registerThunk", async (paylo
         errorMes(error.data.email);
     }
 });
-export const loginThunk = createAsyncThunk("auth/loginThunk", async (payload: LoginPayload, { dispatch }) => {
+export const loginThunk = createAsyncThunk("auth/loginThunk", async (payload: LoginPayload) => {
     try {
         const res = await handleLogin(payload);
         if (res) {
