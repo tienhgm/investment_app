@@ -20,7 +20,8 @@
     "user": "User",
     "profile": "Profile",
     "setting": "Settings",
-    "otp": "Smart OTP"
+    "otp": "Smart OTP",
+    "input_otp": "Please input OTP"
   },
   "validate": {
     "usernameRequired": "Please input Email",

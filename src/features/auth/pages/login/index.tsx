@@ -11,18 +11,6 @@ import styles from './style.module.scss';
 export default function LoginPage() {
   const [form] = Form.useForm();
   const isLoading = useAppSelector(selectAuthLoading);
-  // const onFinish = (values: any) => {
-  //   const data: any = {
-  //     otp: '606782',
-  //   };
-  //   // const a = fetch('/api/accounts/active', {
-  //   //   method: 'PATCH',
-  //   //   headers: {
-  //   //     'Content-Type': 'application/json',
-  //   //   },
-  //   //   body: JSON.stringify(data),
-  //   // });
-  // };
   const history = useHistory();
   const dispatch = useAppDispatch();
   const onFinish = async (values: LoginPayload) => {

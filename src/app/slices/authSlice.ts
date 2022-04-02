@@ -1,3 +1,4 @@
+import { handleActivate } from './../../apis/auth/index';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoginPayload } from 'common';
 import { errorMes, successMes } from 'helper/notify';
@@ -43,6 +44,17 @@ export const logoutThunk = createAsyncThunk("auth/logoutThunk", async () => {
         const res = await handleLogout();
         if (res) {
             successMes("Logout")
+            return res;
+        }
+    } catch (error: any) {
+        errorMes(error.data.email);
+    }
+});
+export const activateThunk = createAsyncThunk("auth/activateThunk", async (payload: string) => {
+    try {
+        const res = await handleActivate(payload);
+        if (res) {
+            successMes("Activated!")
             return res;
         }
     } catch (error: any) {
