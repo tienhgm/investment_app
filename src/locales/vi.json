@@ -20,7 +20,8 @@
     "user": "Người dùng",
     "profile": "Thông tin cá nhân",
     "setting": "Cài đặt",
-    "otp": "OTP thông minh"
+    "otp": "OTP thông minh",
+    "input_otp": "Hãy nhập OTP"
 
   },
   "validate": {
